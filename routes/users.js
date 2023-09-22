@@ -1,10 +1,10 @@
 import express from "express"
-
 import { newUser } from "../controllers/users.js"
+import { validateUserData } from "../middlewares/users.js"
 
 const router = express.Router()
 
 router
-    .post("/", newUser)
+    .post("/", validateUserData, newUser)       //SIGN UP
 
 export default router
