@@ -1,8 +1,10 @@
 import express from "express"
+
+import { newUser } from "../controllers/users.js"
+
 const router = express.Router()
 
-router.get("/", (req, res) => {
-    res.status(200).json({ msg: "From routes" })
-})
+router
+    .post("/", newUser)
 
 export default router
