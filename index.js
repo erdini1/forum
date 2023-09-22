@@ -1,11 +1,11 @@
 import expressConfig from "./config/express.config.js"
 import { PORT } from "./config/env.config.js"
 
+import users from "./routes/users.js"
+
 const app = expressConfig()
 
-app.get("/", (req, res) => {
-    return res.json("Hello World")
-})
+app.use("/users", users)
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
