@@ -1,7 +1,7 @@
-import expressConfig from "./config/express.config.js"
-import { PORT } from "./config/env.config.js"
+import expressConfig from "./src/config/express.config.js"
+import { PORT } from "./src/config/env.config.js"
 
-import users from "./routes/users.js"
+import users from "./src/routes/users.js"
 
 const app = expressConfig()
 
