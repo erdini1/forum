@@ -1,12 +1,12 @@
 import { HTTP_STATUSES } from "../constants/http.js"
 import { users } from "../models/users.js"
+import { generarId } from "../helpers/generarId.js"
 
 export const register = (req, res) => {
     const { username, name, lastName, email, password } = req.body
-    const indexLastUser = users[users.length - 1].id     //ver el problema aca
 
     users.push({
-        id: users.length > 0 ? indexLastUser + 1 : 0,
+        id: generarId(),
         username,
         name,
         lastName,
