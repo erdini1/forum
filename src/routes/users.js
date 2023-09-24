@@ -1,11 +1,11 @@
 import express from "express"
 import { register, login } from "../controllers/users.js"
-import { validateUserData, validateUniqueData, validateUserPasswords } from "../middlewares/users.js"
+import { validateUserData, validateUniqueUserData, validateUserPasswords, validateUserLoginData } from "../middlewares/users.js"
 
 const router = express.Router()
 
 router
-    .post("/", validateUserData, validateUniqueData, validateUserPasswords, register, login)       //SIGN UP
-    .post("/login", login)   //SIGN IN
+    .post("/", validateUserData, validateUniqueUserData, validateUserPasswords, register, login)       //SIGN UP
+    .post("/login", validateUserLoginData, login)   //SIGN IN
 
 export default router
