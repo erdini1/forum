@@ -40,3 +40,13 @@ export const validateUserLoginData = (req, res, next) => {
     }
     next()
 }
+
+export const validateUserCredentials = (req, res, next) => {
+    const { username, password } = req.body
+    const user = users.find(element => element.username === username && element.password === password)
+    if (!user) {
+        return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "Invalid credentials" })
+    }
+    req.user = user
+    next()
+}
