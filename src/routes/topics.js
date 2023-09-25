@@ -1,10 +1,11 @@
 import express from "express"
-import { isAuthenticated } from "../middlewares/topics.js"
-import { allUserTopics } from "../controllers/topics.js"
+import { isAuthenticated, validateTopicExistence } from "../middlewares/topics.js"
+import { allTopics, getTopic } from "../controllers/topics.js"
 
 const router = express.Router()
 
 router
-    .get("/", isAuthenticated, allUserTopics)       //Get All Topics From User
+    .get("/", isAuthenticated, allTopics)       //Get All Topics
+    .get("/:idTopic", isAuthenticated, validateTopicExistence, getTopic)    //Get Topic
 
 export default router
