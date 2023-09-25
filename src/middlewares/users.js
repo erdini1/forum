@@ -7,7 +7,7 @@ export const validateUserData = (req, res, next) => {
     if (req.method === "POST" && (!username || !name || !lastName || !email || !password || !passwordConf)) {
         return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "The fields cannot be empty" })
     }
-    if ([username, name, lastName, email, password, passwordConf].some(element => element === "")) {
+    if ([username, name, lastName, email, password, passwordConf].some(element => element === "")) {         //VER PARA CUANDO PONGA MODIFICAR
         return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "The fields cannot be empty" })
     }
     next()
@@ -52,6 +52,6 @@ export const validateUserCredentials = async (req, res, next) => {
     if (!isMatch) {
         return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "Invalid credentials" })
     }
-    req.user = user
+    req.userId = user.id
     next()
 }

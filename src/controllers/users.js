@@ -17,9 +17,9 @@ export const register = async (req, res) => {
 }
 
 export const login = (req, res) => {
-    const user = req.user
+    const userID = req.userId
     return res.status(HTTP_STATUSES.OK).json({
         msg: "Loggued in successfully",
-        id: user.id
+        id: userID
     })
 }
