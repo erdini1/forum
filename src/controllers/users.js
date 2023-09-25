@@ -1,17 +1,17 @@
 import { HTTP_STATUSES } from "../constants/http.js"
 import { users } from "../models/users.js"
-import { generarId } from "../helpers/generarId.js"
+import { generateId } from "../helpers/generateId.js"
+import { hashPassword } from "../helpers/hashPassword.js"
 
-export const register = (req, res) => {
+export const register = async (req, res) => {
     const { username, name, lastName, email, password } = req.body
-
     users.push({
-        id: generarId(),
+        id: generateId(),
         username,
         name,
         lastName,
         email,
-        password
+        password: await hashPassword(password)
     })
     res.status(HTTP_STATUSES.CREATED).json({ msg: "User created successfully" })
 }

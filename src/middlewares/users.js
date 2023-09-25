@@ -1,4 +1,5 @@
 import { HTTP_STATUSES } from "../constants/http.js";
+import { comparePassword } from "../helpers/hashPassword.js";
 import { users } from "../models/users.js"
 
 export const validateUserData = (req, res, next) => {
@@ -41,10 +42,14 @@ export const validateUserLoginData = (req, res, next) => {
     next()
 }
 
-export const validateUserCredentials = (req, res, next) => {
+export const validateUserCredentials = async (req, res, next) => {
     const { username, password } = req.body
-    const user = users.find(element => element.username === username && element.password === password)
+    const user = users.find(element => element.username === username)
     if (!user) {
+        return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "Invalid credentials" })
+    }
+    const isMatch = await comparePassword(password, user.password)
+    if (!isMatch) {
         return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "Invalid credentials" })
     }
     req.user = user
