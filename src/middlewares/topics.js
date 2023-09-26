@@ -21,3 +21,14 @@ export const validateTopicExistence = (req, res, next) => {
     req.topic = findTopic
     next()
 }
+
+export const validateTopicData = (req, res, next) => {
+    const { title, description } = req.body
+    if (req.method === "POST" && (!title || !description)) {
+        return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "The fields cannot be empty" })
+    }
+    if ([title, description].some(element => element === "")) {
+        return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "The fields cannot be empty" })
+    }
+    next()
+}
