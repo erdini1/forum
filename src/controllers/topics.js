@@ -1,13 +1,20 @@
 import { HTTP_STATUSES } from "../constants/http.js"
 import { topics } from "../models/topics.js"
+import { comments } from "../models/comments.js"
 
 export const allTopics = (req, res) => {
     return res.status(HTTP_STATUSES.OK).json(topics)
 }
 
 export const getTopic = (req, res) => {
-    const topic = req.topic
-    return res.status(HTTP_STATUSES.OK).json(topic)
+    const { id, username, title, description } = req.topic
+    const commentsTopic = comments.filter(element => element.topicId === id)
+    return res.status(HTTP_STATUSES.OK).json({
+        username,
+        title,
+        description,
+        comments: commentsTopic
+    })
 }
 
 export const newTopic = (req, res) => {
