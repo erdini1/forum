@@ -36,3 +36,10 @@ export const updateTopic = (req, res) => {
     ))
     return res.status(HTTP_STATUSES.OK).json({ msg: "Topic modified succesfully" })
 }
+
+export const deleteTopic = (req, res) => {
+    const topic = req.topic
+    const indexTopic = topics.findIndex(element => element.id === topic.id)
+    topics.splice(indexTopic, 1)
+    return res.status(HTTP_STATUSES.OK).json({ msg: "Topic deleted succesfully" })
+}
