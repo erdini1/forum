@@ -32,3 +32,12 @@ export const validateTopicData = (req, res, next) => {
     }
     next()
 }
+
+export const validateTopicOwnership = (req, res, next) => {
+    const user = req.user
+    const topic = req.topic
+    if (topic.username !== user.username) {
+        return res.status(HTTP_STATUSES.UNAUTHORIZED).json({ error: "You are not the owner of the topic to be modified" })
+    }
+    next()
+}

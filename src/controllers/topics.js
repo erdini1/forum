@@ -1,6 +1,5 @@
 import { HTTP_STATUSES } from "../constants/http.js"
 import { topics } from "../models/topics.js"
-import { comments } from "../models/comments.js"
 
 export const allTopics = (req, res) => {
     return res.status(HTTP_STATUSES.OK).json(topics)
@@ -23,4 +22,17 @@ export const newTopic = (req, res) => {
     })
 
     return res.status(HTTP_STATUSES.CREATED).json({ msg: "Topic created succesfully" })
+}
+
+export const updateTopic = (req, res) => {
+    const topic = req.topic
+    const { title, description } = req.body
+
+    topics.forEach(element => (
+        element.id === topic.id ? (
+            element.title = title || element.title,
+            element.description = description || element.description
+        ) : ""
+    ))
+    return res.status(HTTP_STATUSES.OK).json({ msg: "Topic modified succesfully" })
 }
