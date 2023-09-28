@@ -1,3 +1,4 @@
+import { HTTP_STATUSES } from "../constants/http.js"
 import { comments } from "../models/comments.js"
 
 
@@ -11,5 +12,11 @@ export const newComment = (req, res) => {
         username: user.username,
         comment
     })
-    return res.json({ msg: "Comment added succesfully" })
+    return res.status(HTTP_STATUSES.CREATED).json({ msg: "Comment added succesfully" })
+}
+
+export const allCommentFromUser = (req, res) => {
+    const user = req.user
+    const commentsUser = comments.filter(element => element.username === user.username)
+    return res.status(HTTP_STATUSES.OK).json(commentsUser)
 }

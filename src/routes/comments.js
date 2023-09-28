@@ -1,12 +1,14 @@
 import express from "express";
-import { newComment } from "../controllers/comments.js";
-import { isAuthenticated, validateTopicExistence, validateTopicOwnership } from "../middlewares/topics.js";
+import { newComment, allCommentFromUser } from "../controllers/comments.js";
+import { isAuthenticated, validateTopicExistence } from "../middlewares/topics.js";
 import { validateCommentData } from "../middlewares/comments.js";
 
 const router = express.Router()
 
-// get all comment from user
-router.post("/:idTopic", isAuthenticated, validateTopicExistence, validateCommentData, newComment)  //add new comment
+
+router
+    .get("/", isAuthenticated, allCommentFromUser)  // get all comment from user
+    .post("/:idTopic", isAuthenticated, validateTopicExistence, validateCommentData, newComment)  //add new comment
 // modify comment
 // delete comment
 
