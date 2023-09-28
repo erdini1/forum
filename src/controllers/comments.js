@@ -22,5 +22,7 @@ export const allCommentFromUser = (req, res) => {
 }
 
 export const updateComment = (req, res) => {
+    const { comment } = req.body
+    comments.forEach(element => element.comment = comment)
     return res.status(HTTP_STATUSES.OK).json({ msg: "From updateController" })
 }

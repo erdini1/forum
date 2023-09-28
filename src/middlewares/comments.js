@@ -18,3 +18,12 @@ export const validateCommentExistence = (req, res, next) => {
     req.comment = findComment
     next()
 }
+
+export const validateCommentOwnership = (req, res, next) => {
+    const user = req.user
+    const comment = req.comment
+    if (comment.username !== user.username) {
+        return res.status(HTTP_STATUSES.UNAUTHORIZED).json({ error: "You are not the owner of the comment" })
+    }
+    next()
+}
