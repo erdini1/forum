@@ -7,7 +7,7 @@ export const validateUserData = (req, res, next) => {
     if (req.method === "POST" && (!username || !name || !lastName || !email || !password || !passwordConf)) {
         return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "The fields cannot be empty" })
     }
-    if ([username, name, lastName, email, password, passwordConf].some(element => element === "")) {         //VER PARA CUANDO PONGA MODIFICAR
+    if ([username, name, lastName, email, password, passwordConf].some(element => element === "")) {
         return res.status(HTTP_STATUSES.BAD_REQUEST).json({ error: "The fields cannot be empty" })
     }
     next()
