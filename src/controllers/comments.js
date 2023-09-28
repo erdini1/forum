@@ -26,3 +26,10 @@ export const updateComment = (req, res) => {
     comments.forEach(element => element.comment = comment)
     return res.status(HTTP_STATUSES.OK).json({ msg: "From updateController" })
 }
+
+export const deleteComment = (req, res) => {
+    const comment = req.comment
+    const indexComment = comments.findIndex(element => element.id === comment.id)
+    comments.splice(indexComment, 1)
+    return res.status(HTTP_STATUSES.OK).json({ msg: "Comment deleted succesfully" })
+}
