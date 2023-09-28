@@ -20,3 +20,7 @@ export const allCommentFromUser = (req, res) => {
     const commentsUser = comments.filter(element => element.username === user.username)
     return res.status(HTTP_STATUSES.OK).json(commentsUser)
 }
+
+export const updateComment = (req, res) => {
+    return res.status(HTTP_STATUSES.OK).json({ msg: "From updateController" })
+}
